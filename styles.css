@@ -1,0 +1,552 @@
+/* ===================================
+   CSS Variables
+   =================================== */
+:root {
+  /* Primary Colors */
+  --lime: hsl(61, 70%, 52%);
+  --red: hsl(4, 69%, 50%);
+
+  /* Neutral Colors */
+  --white: hsl(0, 0%, 100%);
+  --slate-100: hsl(202, 86%, 94%);
+  --slate-300: hsl(203, 41%, 72%);
+  --slate-500: hsl(200, 26%, 54%);
+  --slate-700: hsl(200, 24%, 40%);
+  --slate-900: hsl(202, 55%, 16%);
+
+  /* Typography */
+  --font-family: "Plus Jakarta Sans", sans-serif;
+  --font-size-base: 16px;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 2.5rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  /* Transitions */
+  --transition: all 0.3s ease;
+}
+
+/* ===================================
+   CSS Reset
+   =================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===================================
+   Base Styles
+   =================================== */
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.5;
+  color: var(--slate-700);
+  background-color: var(--slate-100);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-lg);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ===================================
+   Container & Layout
+   =================================== */
+.container {
+  width: 100%;
+  max-width: 1008px;
+  margin: 0 auto;
+}
+
+.calculator-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.1);
+  min-height: 600px;
+}
+
+@media (min-width: 900px) {
+  .calculator-wrapper {
+    grid-template-columns: 504px 504px;
+    max-width: 1008px;
+  }
+}
+
+/* ===================================
+   Calculator Section
+   =================================== */
+.calculator-section {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 600px;
+}
+
+@media (min-width: 900px) {
+  .calculator-section {
+    padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--slate-900);
+  line-height: 1.2;
+}
+
+@media (min-width: 900px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+}
+
+.clear-btn {
+  background: none;
+  border: none;
+  color: var(--slate-700);
+  text-decoration: underline;
+  font-size: 1rem;
+  padding: var(--spacing-xs);
+  transition: var(--transition);
+}
+
+.clear-btn:hover,
+.clear-btn:focus {
+  color: var(--slate-900);
+  outline: 2px solid var(--slate-900);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ===================================
+   Form Styles
+   =================================== */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--slate-700);
+  font-weight: var(--font-weight-medium);
+  font-size: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Input Wrapper with Prefix/Suffix */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--slate-300);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: var(--transition);
+  height: 48px;
+}
+
+.input-wrapper:hover {
+  border-color: var(--slate-900);
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--lime);
+}
+
+.input-wrapper.error {
+  border-color: var(--red);
+}
+
+.input-wrapper::before {
+  content: attr(data-prefix);
+  background-color: var(--slate-100);
+  color: var(--slate-700);
+  padding: 0 1rem;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+}
+
+.input-wrapper::after {
+  content: attr(data-suffix);
+  background-color: var(--slate-100);
+  color: var(--slate-700);
+  padding: 0 1rem;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+}
+
+.input-wrapper[data-prefix=""]::before,
+.input-wrapper[data-suffix=""]::after {
+  content: none;
+  padding: 0;
+}
+
+.input-wrapper input {
+  flex: 1;
+  border: none;
+  padding: 0 1rem;
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--slate-900);
+  outline: none;
+  height: 100%;
+  width: 85px;
+}
+
+.input-wrapper input::placeholder {
+  color: var(--slate-500);
+  opacity: 0.5;
+}
+
+/* Error Message */
+.error-message {
+  display: block;
+  color: var(--red);
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  min-height: 1.25rem;
+}
+
+.error-message:empty {
+  display: none;
+}
+
+/* ===================================
+   Radio Group
+   =================================== */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radio-option {
+  position: relative;
+}
+
+.radio-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-option label {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--slate-300);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: var(--font-weight-bold);
+  color: var(--slate-900);
+  height: 48px;
+  font-size: 1.125rem;
+}
+
+.radio-option label::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--slate-300);
+  border-radius: 50%;
+  margin-right: 1rem;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.radio-option:hover label {
+  border-color: var(--lime);
+}
+
+.radio-option input[type="radio"]:focus + label {
+  outline: 2px solid var(--slate-900);
+  outline-offset: 2px;
+}
+
+.radio-option input[type="radio"]:checked + label {
+  background-color: hsl(61, 70%, 92%);
+  border-color: var(--lime);
+}
+
+.radio-option input[type="radio"]:checked + label::before {
+  border-color: var(--lime);
+  background-color: var(--lime);
+  box-shadow: inset 0 0 0 4px var(--white);
+}
+
+/* ===================================
+   Buttons
+   =================================== */
+.submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  background-color: var(--lime);
+  color: var(--slate-900);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-bold);
+  transition: var(--transition);
+  margin-top: 2.5rem;
+  height: 56px;
+}
+
+@media (min-width: 900px) {
+  .submit-btn {
+    width: 314px;
+    padding: 1rem 2.5rem;
+  }
+}
+
+.submit-btn:hover {
+  background-color: hsl(61, 70%, 42%);
+}
+
+.submit-btn:focus {
+  outline: 2px solid var(--slate-900);
+  outline-offset: 4px;
+}
+
+.submit-btn svg {
+  flex-shrink: 0;
+}
+
+/* ===================================
+   Results Section
+   =================================== */
+.results-section {
+  background-color: var(--slate-900);
+  color: var(--white);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 600px;
+}
+
+@media (min-width: 900px) {
+  .results-section {
+    padding: 2.5rem;
+    border-radius: 0 0 0 80px;
+  }
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  max-width: 400px;
+}
+
+.empty-state img {
+  margin: 0 auto 1rem;
+}
+
+.empty-state h2 {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+
+.empty-state p {
+  color: var(--slate-300);
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+/* Results Display */
+.results-display {
+  width: 100%;
+  max-width: 450px;
+}
+
+.results-display h2 {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: 1rem;
+}
+
+.results-description {
+  color: var(--slate-300);
+  margin-bottom: 2.5rem;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.results-card {
+  background-color: rgba(0, 0, 0, 0.25);
+  border-top: 4px solid var(--lime);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .results-card {
+    padding: 2.5rem 2rem;
+  }
+}
+
+.result-item {
+  padding: 0;
+}
+
+.result-label {
+  color: var(--slate-300);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.result-value {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--white);
+}
+
+.result-value.monthly {
+  color: var(--lime);
+  font-size: 2.5rem;
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+
+@media (min-width: 900px) {
+  .result-value.monthly {
+    font-size: 2rem;
+  }
+}
+
+.result-value.total {
+  font-size: 1.5rem;
+}
+
+.results-card hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 2rem 0;
+}
+
+/* ===================================
+   Utility Classes
+   =================================== */
+[hidden] {
+  display: none !important;
+}
+
+/* Focus Visible for Better Accessibility */
+:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+}
+
+/* ===================================
+   Responsive Adjustments
+   =================================== */
+@media (max-width: 899px) {
+  body {
+    padding: 1rem;
+  }
+
+  .calculator-section {
+    padding: 1.5rem;
+  }
+
+  .results-section {
+    padding: 1.5rem;
+  }
+
+  .header h1 {
+    font-size: 1.25rem;
+  }
+
+  .results-display h2 {
+    font-size: 1.25rem;
+  }
+}
+
+/* ===================================
+   Print Styles
+   =================================== */
+@media print {
+  body {
+    background-color: var(--white);
+  }
+
+  .calculator-section {
+    display: none;
+  }
+
+  .results-section {
+    color: var(--slate-900);
+    background-color: var(--white);
+  }
+
+  .results-display {
+    border: 2px solid var(--slate-900);
+  }
+}
