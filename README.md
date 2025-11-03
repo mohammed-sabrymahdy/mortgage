@@ -1,6 +1,7 @@
 # Frontend Mentor - Mortgage repayment calculator
 
 ![Design preview for the Mortgage repayment calculator coding challenge](./preview.jpg)
+![demo]([./preview.jpg](https://mohammed-sabrymahdy.github.io/mortgage/))
 
 ## Welcome! 👋
 
